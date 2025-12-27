@@ -12,16 +12,33 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    /* Темная тема Telegram */
+    body { background-color: #e5e5e5; }
+    .fc-toolbar-title { font-weight: 600; }
+    .fc-event { border-radius: 12px !important; font-weight: 500; }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
+<body class="min-h-screen flex flex-col items-center p-4 font-sans">
 
-  <h1 class="text-3xl font-bold text-gray-800 mb-4">Семейный календарь</h1>
+  <!-- Заголовок -->
+  <header class="w-full max-w-3xl mb-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Семейный календарь</h1>
+  </header>
 
-  <div id="calendar" class="bg-white rounded-2xl shadow-lg p-4 w-full max-w-3xl"></div>
+  <!-- Календарь -->
+  <div id="calendar" class="bg-white dark:bg-gray-700 rounded-2xl shadow-md w-full max-w-3xl p-4"></div>
 
-  <button id="add-event" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl shadow-md transition duration-300">
-    Добавить событие
-  </button>
+  <!-- Панель кнопок -->
+  <div class="w-full max-w-3xl flex justify-between mt-4">
+    <button id="add-event" class="flex-1 mr-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
+      Добавить событие
+    </button>
+    <button id="toggle-dark" class="flex-1 ml-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
+      🌙 Тёмная тема
+    </button>
+  </div>
 
   <script>
     const tg = window.Telegram.WebApp;
@@ -51,11 +68,23 @@
       const dateStr = prompt('Дата события (YYYY-MM-DD):');
       if (!dateStr) return;
 
-      const event = { title, start: dateStr, backgroundColor: '#3b82f6', borderColor: '#2563eb', textColor: 'white' };
+      const event = { 
+        title, 
+        start: dateStr, 
+        backgroundColor: '#0088cc', 
+        borderColor: '#006699', 
+        textColor: 'white' 
+      };
       calendar.addEvent(event);
+    };
 
-      alert('Событие добавлено: ' + title + ' на ' + dateStr);
+    // Переключение тёмной темы
+    const toggleBtn = document.getElementById('toggle-dark');
+    toggleBtn.onclick = () => {
+      document.body.classList.toggle('dark');
+      document.getElementById('calendar').classList.toggle('dark:bg-gray-700');
     };
   </script>
+
 </body>
 </html>
