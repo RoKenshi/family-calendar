@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Семейный календарь</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 12px;
+    }
+    button {
+      padding: 10px 14px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Семейный календарь</h2>
+  <button id="btn">Проверка Telegram</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+
+    document.getElementById('btn').onclick = () => {
+      alert('Привет, ' + (tg.initDataUnsafe.user?.first_name || 'гость'));
+    };
+  </script>
+</body>
+</html>
