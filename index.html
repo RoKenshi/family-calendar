@@ -14,28 +14,53 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
-    /* Темная тема Telegram */
-    body { background-color: #e5e5e5; }
-    .fc-toolbar-title { font-weight: 600; }
-    .fc-event { border-radius: 12px !important; font-weight: 500; }
+    /* Telegram 2025 flat style */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFFF; /* светлая тема */
+      margin: 0;
+      padding: 0;
+    }
+    .dark body {
+      background-color: #7661C2; /* темная тема */
+    }
+    #calendar {
+      background-color: #FFFFFF; /* плитка календаря */
+      color: #000000;
+      border: 1px solid #24A1DE;
+      width: 100%;
+      max-width: 720px;
+      margin: auto;
+    }
+    .fc-event {
+      border: 1px solid #0088CC !important;
+      background-color: #0088CC !important;
+      color: #FFFFFF !important;
+      border-radius: 0 !important;
+      font-weight: 500;
+      padding: 2px 4px !important;
+    }
+    button {
+      border: none;
+      font-weight: 600;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 font-sans">
+<body class="flex flex-col items-center p-2">
 
-  <!-- Заголовок -->
-  <header class="w-full max-w-3xl mb-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Семейный календарь</h1>
+  <header class="w-full max-w-3xl flex justify-between items-center mb-2 p-2">
+    <h1 class="text-2xl font-bold text-[#0088CC]">Семейный календарь</h1>
   </header>
 
   <!-- Календарь -->
-  <div id="calendar" class="bg-white dark:bg-gray-700 rounded-2xl shadow-md w-full max-w-3xl p-4"></div>
+  <div id="calendar" class="mb-2"></div>
 
   <!-- Панель кнопок -->
-  <div class="w-full max-w-3xl flex justify-between mt-4">
-    <button id="add-event" class="flex-1 mr-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
+  <div class="w-full max-w-3xl flex justify-between">
+    <button id="add-event" class="flex-1 mr-1 bg-[#24A1DE] hover:bg-[#0088CC] text-white py-2 px-4">
       Добавить событие
     </button>
-    <button id="toggle-dark" class="flex-1 ml-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
+    <button id="toggle-dark" class="flex-1 ml-1 bg-[#A19679] hover:bg-[#7661C2] text-white py-2 px-4">
       🌙 Тёмная тема
     </button>
   </div>
@@ -44,7 +69,6 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
 
-    // Инициализация календаря
     const calendarEl = document.getElementById('calendar');
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
@@ -60,7 +84,6 @@
     });
     calendar.render();
 
-    // Добавление события
     document.getElementById('add-event').onclick = () => {
       const title = prompt('Название события:');
       if (!title) return;
@@ -71,20 +94,16 @@
       const event = { 
         title, 
         start: dateStr, 
-        backgroundColor: '#0088cc', 
-        borderColor: '#006699', 
+        backgroundColor: '#0088CC', 
+        borderColor: '#0088CC', 
         textColor: 'white' 
       };
       calendar.addEvent(event);
     };
 
-    // Переключение тёмной темы
-    const toggleBtn = document.getElementById('toggle-dark');
-    toggleBtn.onclick = () => {
+    document.getElementById('toggle-dark').onclick = () => {
       document.body.classList.toggle('dark');
-      document.getElementById('calendar').classList.toggle('dark:bg-gray-700');
     };
   </script>
-
 </body>
 </html>
