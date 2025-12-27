@@ -14,27 +14,31 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background-color: #7661C2; color:white; }
-    #calendar { background-color:#5e4fa2; border:1px solid #24A1DE; width:100%; max-width:900px; margin:auto; }
-    .fc-event { border-radius:0 !important; padding:2px 4px !important; font-weight:500; color:white !important; border:1px solid #24A1DE !important; background-color:#24A1DE !important; }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background-color: #1E1E1E; color:white; }
+    #calendar { max-width:900px; margin:auto; background-color:#2C2C2C; border:1px solid #24A1DE; }
+    .fc-event { border-radius:0 !important; padding:2px 4px !important; font-weight:500; color:white !important; border:1px solid #0088CC !important; background-color:#0088CC !important; }
     .modal-bg { background:rgba(0,0,0,0.5); position:fixed; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:50; }
-    .modal { background:#FFFFFF; color:#000000; padding:20px; max-width:400px; width:90%; border:1px solid #24A1DE; display:flex; flex-direction:column; }
-    .modal input, .modal select { margin-bottom:10px; padding:6px; border:1px solid #24A1DE; }
-    .modal button { padding:8px; margin-top:5px; cursor:pointer; background:#24A1DE; color:white; border:none; }
-    .modal button:hover { background:#0088CC; }
+    .modal { background:#2C2C2C; color:white; padding:20px; max-width:400px; width:90%; display:flex; flex-direction:column; }
+    .modal input, .modal select { margin-bottom:10px; padding:6px; border:1px solid #24A1DE; background:#1E1E1E; color:white; }
+    .modal button { padding:8px; margin-top:5px; cursor:pointer; border:none; font-weight:600; }
+    .btn-primary { background:#24A1DE; color:white; }
+    .btn-primary:hover { background:#0088CC; }
+    .btn-secondary { background:#A19679; color:white; }
+    .btn-secondary:hover { background:#7661C2; }
+    header h1 { color:#24A1DE; margin-left:10px; font-size:1.5rem; font-weight:700; }
   </style>
 </head>
 <body class="flex flex-col items-center p-2">
 
-<header class="w-full max-w-3xl flex justify-between items-center mb-2 p-2">
-  <h1 class="text-2xl font-bold" style="color:#0088CC">Семейный календарь</h1>
+<header class="w-full max-w-3xl flex justify-start items-center mb-2 p-2">
+  <h1>Семейный календарь</h1>
 </header>
 
 <div id="calendar" class="mb-2"></div>
 
 <div class="w-full max-w-3xl flex justify-between mb-4">
-  <button id="open-modal" style="flex:1; margin-right:5px; padding:10px; background:#24A1DE; color:white;">Добавить событие</button>
-  <button id="toggle-view" style="flex:1; margin-left:5px; padding:10px; background:#A19679; color:white;">Сменить вид</button>
+  <button id="open-modal" class="btn-primary flex-1 mr-1 py-2 px-4">Добавить событие</button>
+  <button id="toggle-view" class="btn-secondary flex-1 ml-1 py-2 px-4">Сменить вид</button>
 </div>
 
 <!-- Модальное окно -->
@@ -49,8 +53,8 @@
       <option value="#0088CC">Работа</option>
       <option value="#A19679">Школа</option>
     </select>
-    <button id="save-event">Сохранить</button>
-    <button id="cancel-event" style="background:#B00020;">Отмена</button>
+    <button id="save-event" class="btn-primary">Сохранить</button>
+    <button id="cancel-event" class="btn-secondary">Отмена</button>
   </div>
 </div>
 
@@ -72,35 +76,47 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
   eventClick:function(info){
     const newTitle = prompt('Редактировать событие:', info.event.title);
     if(newTitle) info.event.setProp('title', newTitle);
+  },
+  select: function(selectionInfo){
+    openModal(selectionInfo.startStr, selectionInfo.endStr);
+    calendar.unselect();
   }
 });
 calendar.render();
 
+// Переключение вида
 document.getElementById('toggle-view').onclick = () => {
   currentView = (currentView==='dayGridMonth') ? 'timeGridWeek' : (currentView==='timeGridWeek') ? 'timeGridDay' : 'dayGridMonth';
   calendar.changeView(currentView);
 };
 
+// Модальное окно
 const modalBg = document.getElementById('modal-bg');
-document.getElementById('open-modal').onclick = () => { modalBg.style.display='flex'; };
+const titleInput = document.getElementById('event-title');
+const startInput = document.getElementById('event-start');
+const endInput = document.getElementById('event-end');
+const categorySelect = document.getElementById('event-category');
 
-document.getElementById('cancel-event').onclick = () => {
-  modalBg.style.display='none';
-};
+document.getElementById('open-modal').onclick = () => openModal();
+
+document.getElementById('cancel-event').onclick = () => { modalBg.style.display='none'; };
 
 document.getElementById('save-event').onclick = () => {
-  const title = document.getElementById('event-title').value;
-  const start = document.getElementById('event-start').value;
-  const end = document.getElementById('event-end').value;
-  const color = document.getElementById('event-category').value;
+  const title = titleInput.value;
+  const start = startInput.value;
+  const end = endInput.value || start;
+  const color = categorySelect.value;
   if(title && start){
-    calendar.addEvent({title,start,end: end||start,backgroundColor:color,borderColor:color,textColor:'white'});
+    calendar.addEvent({title,start,end,backgroundColor:color,borderColor:color,textColor:'white'});
     modalBg.style.display='none';
-    document.getElementById('event-title').value='';
-    document.getElementById('event-start').value='';
-    document.getElementById('event-end').value='';
+    titleInput.value=''; startInput.value=''; endInput.value='';
   }
 };
+
+function openModal(start='', end=''){
+  titleInput.value=''; startInput.value=start; endInput.value=end;
+  modalBg.style.display='flex';
+}
 </script>
 
 </body>
