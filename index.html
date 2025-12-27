@@ -14,133 +14,94 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
-    /* Telegram 2025 flat dark theme by default */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #7661C2; /* Telegram dark theme background */
-      color: #FFFFFF;
-    }
-
-    #calendar {
-      background-color: #5e4fa2; /* плоский календарь */
-      border: 1px solid #24A1DE;
-      width: 100%;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .fc-event {
-      border-radius: 0 !important; /* плоские события */
-      padding: 2px 4px !important;
-      font-weight: 500;
-      color: white !important;
-      border: 1px solid #24A1DE !important;
-      background-color: #24A1DE !important;
-    }
-
-    /* Кнопки */
-    .btn {
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-primary { background-color: #24A1DE; color: white; }
-    .btn-primary:hover { background-color: #0088CC; }
-
-    .btn-secondary { background-color: #A19679; color: white; }
-    .btn-secondary:hover { background-color: #7661C2; }
-
-    /* Заголовок */
-    header h1 {
-      color: #0088CC;
-    }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background-color: #7661C2; color:white; }
+    #calendar { background-color:#5e4fa2; border:1px solid #24A1DE; width:100%; max-width:900px; margin:auto; }
+    .fc-event { border-radius:0 !important; padding:2px 4px !important; font-weight:500; color:white !important; border:1px solid #24A1DE !important; background-color:#24A1DE !important; }
+    .modal-bg { background:rgba(0,0,0,0.5); position:fixed; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:50; }
+    .modal { background:#FFFFFF; color:#000000; padding:20px; max-width:400px; width:90%; border:1px solid #24A1DE; display:flex; flex-direction:column; }
+    .modal input, .modal select { margin-bottom:10px; padding:6px; border:1px solid #24A1DE; }
+    .modal button { padding:8px; margin-top:5px; cursor:pointer; background:#24A1DE; color:white; border:none; }
+    .modal button:hover { background:#0088CC; }
   </style>
 </head>
 <body class="flex flex-col items-center p-2">
 
-  <header class="w-full max-w-3xl flex justify-between items-center mb-2 p-2">
-    <h1 class="text-2xl font-bold">Семейный календарь</h1>
-  </header>
+<header class="w-full max-w-3xl flex justify-between items-center mb-2 p-2">
+  <h1 class="text-2xl font-bold" style="color:#0088CC">Семейный календарь</h1>
+</header>
 
-  <!-- Календарь -->
-  <div id="calendar" class="mb-2"></div>
+<div id="calendar" class="mb-2"></div>
 
-  <!-- Панель кнопок -->
-  <div class="w-full max-w-3xl flex justify-between mb-4">
-    <button id="add-event" class="btn btn-primary flex-1 mr-1 py-2 px-4">Добавить событие</button>
-    <button id="toggle-view" class="btn btn-secondary flex-1 ml-1 py-2 px-4">Сменить вид</button>
+<div class="w-full max-w-3xl flex justify-between mb-4">
+  <button id="open-modal" style="flex:1; margin-right:5px; padding:10px; background:#24A1DE; color:white;">Добавить событие</button>
+  <button id="toggle-view" style="flex:1; margin-left:5px; padding:10px; background:#A19679; color:white;">Сменить вид</button>
+</div>
+
+<!-- Модальное окно -->
+<div id="modal-bg" class="modal-bg" style="display:none;">
+  <div class="modal">
+    <h2>Новое событие</h2>
+    <input type="text" id="event-title" placeholder="Название события">
+    <input type="datetime-local" id="event-start">
+    <input type="datetime-local" id="event-end">
+    <select id="event-category">
+      <option value="#24A1DE">Семья</option>
+      <option value="#0088CC">Работа</option>
+      <option value="#A19679">Школа</option>
+    </select>
+    <button id="save-event">Сохранить</button>
+    <button id="cancel-event" style="background:#B00020;">Отмена</button>
   </div>
+</div>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+<script>
+const tg = window.Telegram.WebApp; tg.ready();
 
-    const calendarEl = document.getElementById('calendar');
-    let currentView = 'dayGridMonth'; // по умолчанию месяц
+const calendarEl = document.getElementById('calendar');
+let currentView = 'dayGridMonth';
 
-    // Инициализация FullCalendar
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: currentView,
-      locale: 'ru',
-      selectable: true,
-      editable: true, // drag & drop событий
-      eventResizableFromStart: true,
-      events: [],
-      height: "auto",
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      eventClick: function(info) {
-        const newTitle = prompt('Редактировать событие:', info.event.title);
-        if (newTitle) info.event.setProp('title', newTitle);
-      },
-      select: function(selectionInfo) {
-        const title = prompt('Название события:');
-        if (title) {
-          calendar.addEvent({
-            title,
-            start: selectionInfo.start,
-            end: selectionInfo.end,
-            allDay: selectionInfo.allDay,
-            backgroundColor: '#24A1DE',
-            borderColor: '#24A1DE',
-            textColor: 'white'
-          });
-        }
-        calendar.unselect();
-      }
-    });
-    calendar.render();
+const calendar = new FullCalendar.Calendar(calendarEl, {
+  initialView: currentView,
+  locale: 'ru',
+  selectable: true,
+  editable: true,
+  eventResizableFromStart: true,
+  events: [],
+  height:"auto",
+  headerToolbar:{left:'prev,next today',center:'title',right:'dayGridMonth,timeGridWeek,timeGridDay'},
+  eventClick:function(info){
+    const newTitle = prompt('Редактировать событие:', info.event.title);
+    if(newTitle) info.event.setProp('title', newTitle);
+  }
+});
+calendar.render();
 
-    // Добавление события через кнопку
-    document.getElementById('add-event').onclick = () => {
-      const title = prompt('Название события:');
-      if (!title) return;
+document.getElementById('toggle-view').onclick = () => {
+  currentView = (currentView==='dayGridMonth') ? 'timeGridWeek' : (currentView==='timeGridWeek') ? 'timeGridDay' : 'dayGridMonth';
+  calendar.changeView(currentView);
+};
 
-      const dateStr = prompt('Дата события (YYYY-MM-DD):');
-      if (!dateStr) return;
+const modalBg = document.getElementById('modal-bg');
+document.getElementById('open-modal').onclick = () => { modalBg.style.display='flex'; };
 
-      calendar.addEvent({
-        title,
-        start: dateStr,
-        backgroundColor: '#24A1DE',
-        borderColor: '#24A1DE',
-        textColor: 'white'
-      });
-    };
+document.getElementById('cancel-event').onclick = () => {
+  modalBg.style.display='none';
+};
 
-    // Переключение вида календаря
-    document.getElementById('toggle-view').onclick = () => {
-      currentView = (currentView === 'dayGridMonth') ? 'timeGridWeek' : (currentView === 'timeGridWeek') ? 'timeGridDay' : 'dayGridMonth';
-      calendar.changeView(currentView);
-    };
-  </script>
+document.getElementById('save-event').onclick = () => {
+  const title = document.getElementById('event-title').value;
+  const start = document.getElementById('event-start').value;
+  const end = document.getElementById('event-end').value;
+  const color = document.getElementById('event-category').value;
+  if(title && start){
+    calendar.addEvent({title,start,end: end||start,backgroundColor:color,borderColor:color,textColor:'white'});
+    modalBg.style.display='none';
+    document.getElementById('event-title').value='';
+    document.getElementById('event-start').value='';
+    document.getElementById('event-end').value='';
+  }
+};
+</script>
 
 </body>
 </html>
