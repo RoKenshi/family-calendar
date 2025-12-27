@@ -4,49 +4,58 @@
   <meta charset="UTF-8">
   <title>Семейный календарь</title>
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FullCalendar -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
-  <style>
-    body { font-family: Arial, sans-serif; padding: 10px; }
-    #calendar { max-width: 700px; margin: auto; }
-    #add-event { margin-top: 10px; padding: 8px 12px; font-size: 16px; }
-  </style>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
 
-<h2>Семейный календарь</h2>
+  <h1 class="text-3xl font-bold text-gray-800 mb-4">Семейный календарь</h1>
 
-<div id="calendar"></div>
-<button id="add-event">Добавить событие</button>
+  <div id="calendar" class="bg-white rounded-2xl shadow-lg p-4 w-full max-w-3xl"></div>
 
-<script>
-  const tg = window.Telegram.WebApp;
-  tg.ready();
+  <button id="add-event" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl shadow-md transition duration-300">
+    Добавить событие
+  </button>
 
-  const calendarEl = document.getElementById('calendar');
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'ru',
-    selectable: true,
-    events: [] // сюда будем добавлять события
-  });
-  calendar.render();
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
 
-  document.getElementById('add-event').onclick = () => {
-    const title = prompt('Название события:');
-    if (!title) return;
+    // Инициализация календаря
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'ru',
+      selectable: true,
+      events: [],
+      height: "auto",
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      }
+    });
+    calendar.render();
 
-    const dateStr = prompt('Дата события (YYYY-MM-DD):');
-    if (!dateStr) return;
+    // Добавление события
+    document.getElementById('add-event').onclick = () => {
+      const title = prompt('Название события:');
+      if (!title) return;
 
-    const event = { title, start: dateStr };
-    calendar.addEvent(event);
-    
-    alert('Событие добавлено: ' + title + ' на ' + dateStr);
-  };
+      const dateStr = prompt('Дата события (YYYY-MM-DD):');
+      if (!dateStr) return;
 
-</script>
+      const event = { title, start: dateStr, backgroundColor: '#3b82f6', borderColor: '#2563eb', textColor: 'white' };
+      calendar.addEvent(event);
+
+      alert('Событие добавлено: ' + title + ' на ' + dateStr);
+    };
+  </script>
 </body>
 </html>
