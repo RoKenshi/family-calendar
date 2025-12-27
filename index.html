@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Семейный календарь</title>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 12px;
-    }
-    button {
-      padding: 10px 14px;
-      font-size: 16px;
-    }
+    body { font-family: Arial, sans-serif; padding: 10px; }
+    #calendar { max-width: 700px; margin: auto; }
+    #add-event { margin-top: 10px; padding: 8px 12px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h2>Семейный календарь</h2>
-  <button id="btn">Проверка Telegram</button>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+<h2>Семейный календарь</h2>
 
-    document.getElementById('btn').onclick = () => {
-      alert('Привет, ' + (tg.initDataUnsafe.user?.first_name || 'гость'));
-    };
-  </script>
+<div id="calendar"></div>
+<button id="add-event">Добавить событие</button>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+
+  const calendarEl = document.getElementById('calendar');
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'ru',
+    selectable: true,
+    events: [] // сюда будем добавлять события
+  });
+  calendar.render();
+
+  document.getElementById('add-event').onclick = () => {
+    const title = prompt('Название события:');
+    if (!title) return;
+
+    const dateStr = prompt('Дата события (YYYY-MM-DD):');
+    if (!dateStr) return;
+
+    const event = { title, start: dateStr };
+    calendar.addEvent(event);
+    
+    alert('Событие добавлено: ' + title + ' на ' + dateStr);
+  };
+
+</script>
 </body>
 </html>
