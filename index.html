@@ -421,11 +421,20 @@
           url += `&startFrom=${startFrom}&startTo=${startTo}`;
         }
 
+        console.log('Загрузка событий:', {
+          url: url,
+          hasInitData: !!telegramInitData
+        });
+
         const response = await fetch(url, {
           method: 'GET',
           headers: {
             'X-Telegram-Init-Data': telegramInitData
           }
+        }).catch(networkError => {
+          // Обработка сетевых ошибок
+          console.error('Network error при загрузке событий:', networkError);
+          throw new Error(`Не удалось подключиться к серверу: ${networkError.message}`);
         });
 
         if (!response.ok) {
@@ -458,8 +467,18 @@
         const page = await response.json();
         return page.content || [];
       } catch (error) {
-        console.error('Ошибка получения событий:', error);
-        showToast('Ошибка загрузки событий: ' + error.message, 'error');
+        console.error('Ошибка получения событий:', {
+          message: error.message,
+          name: error.name,
+          apiUrl: API_BASE_URL
+        });
+        
+        let userMessage = error.message;
+        if (error.message.includes('Failed to fetch') || error.message.includes('load failed')) {
+          userMessage = `Сервер недоступен. Проверьте, что backend запущен на ${API_BASE_URL}`;
+        }
+        
+        showToast(userMessage, 'error');
         return null;
       }
     }
@@ -569,6 +588,10 @@
           throw new Error('Длительность должна быть больше 0');
         }
         
+        if (!telegramInitData) {
+          throw new Error('Telegram initData недоступен. Откройте приложение через Telegram.');
+        }
+        
         // Объединяем дату и время в ISO-8601 формат
         const startAt = combineDateTime(selectedDate, time);
         
@@ -580,6 +603,12 @@
           durationMinutes: duration
         };
 
+        console.log('Отправка события:', {
+          url: `${API_BASE_URL}/api/events`,
+          data: eventData,
+          hasInitData: !!telegramInitData
+        });
+
         const response = await fetch(`${API_BASE_URL}/api/events`, {
           method: 'POST',
           headers: {
@@ -587,6 +616,10 @@
             'X-Telegram-Init-Data': telegramInitData
           },
           body: JSON.stringify(eventData)
+        }).catch(networkError => {
+          // Обработка сетевых ошибок (CORS, таймаут, недоступен сервер)
+          console.error('Network error:', networkError);
+          throw new Error(`Не удалось подключиться к серверу: ${networkError.message}. Проверьте, что backend доступен по адресу ${API_BASE_URL}`);
         });
 
         if (response.ok || response.status === 201) {
@@ -632,8 +665,26 @@
           throw new Error(errorMessage);
         }
       } catch (error) {
-        console.error('Error:', error);
-        showToast('Ошибка при отправке события: ' + error.message, 'error');
+        console.error('Error details:', {
+          message: error.message,
+          name: error.name,
+          stack: error.stack,
+          apiUrl: API_BASE_URL
+        });
+        
+        let userMessage = error.message;
+        
+        // Дополнительная информация для сетевых ошибок
+        if (error.message.includes('Failed to fetch') || error.message.includes('load failed')) {
+          userMessage = `Сервер недоступен. Проверьте:\n1. Backend запущен на ${API_BASE_URL}\n2. Cloudflare Tunnel активен (если используется)\n3. Нет блокировок CORS`;
+        }
+        
+        showToast(userMessage, 'error');
+        
+        // Показываем alert в Telegram, если доступен
+        if (tg && tg.showAlert) {
+          tg.showAlert(userMessage);
+        }
       } finally {
         saveBtn.disabled = false;
         saveBtn.textContent = originalText;
