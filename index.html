@@ -7,274 +7,714 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- FullCalendar CSS/JS (если нужен функционал) -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body class="bg-gray-900 text-white">
 
   <div class="flex items-center justify-center py-8 px-4">
-<!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
-
-            <div class="max-w-sm w-full shadow-lg">
-                <div class="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
-                    <div class="px-4 flex items-center justify-between">
-                        <span  tabindex="0" class="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800">October 2020</span>
-                        <div class="flex items-center">
-                            <button aria-label="calendar backward" class="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <polyline points="15 6 9 12 15 18" />
-                            </svg>
-                        </button>
-                        <button aria-label="calendar forward" class="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100"> 
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler  icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <polyline points="9 6 15 12 9 18" />
-                            </svg>
-                        </button>
-
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between pt-12 overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Mo</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Tu</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">We</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Th</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Fr</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Sa</p>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="w-full flex justify-center">
-                                            <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Su</p>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                                    </td>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                                    </td>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">1</p>
-                                        </div>
-                                    </td>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">2</p>
-                                        </div>
-                                    </td>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">3</p>
-                                        </div>
-                                    </td>
-                                    <td class="pt-6">
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">4</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">5</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">6</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">7</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="w-full h-full">
-                                            <div class="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                                <a  role="link" tabindex="0" class="focus:outline-none  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">8</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">9</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">10</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">11</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">12</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">13</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">14</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">15</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">16</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">17</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">18</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">19</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">20</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">21</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">22</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">23</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">24</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100">25</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">26</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">27</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">28</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">29</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                            <p class="text-base text-gray-500 dark:text-gray-100 font-medium">30</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="md:py-8 py-5 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
-                    <div class="px-4">
-                        <div class="border-b pb-4 border-gray-400 border-dashed">
-                            <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                            <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Zoom call with design team</a>
-                            <p class="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                        </div>
-                        <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-                            <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">10:00 AM</p>
-                            <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Orientation session with new hires</a>
-                        </div>
-                        <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-                            <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                            <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Zoom call with design team</a>
-                            <p class="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                        </div>
-                    </div>
-                </div>
+    <div class="max-w-sm w-full shadow-lg">
+      <div class="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
+        <div class="px-4 flex items-center justify-between">
+          <div>
+            <span id="calendar-title" tabindex="0" class="focus:outline-none text-base font-bold dark:text-gray-100 text-gray-800">January 2025</span>
+            <div id="user-info" class="hidden text-xs text-gray-400 dark:text-gray-400 mt-1">
+              <!-- Информация о пользователе появится здесь -->
             </div>
+          </div>
+          <div class="flex items-center">
+            <button id="prev-month" aria-label="calendar backward" class="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <polyline points="15 6 9 12 15 18" />
+              </svg>
+            </button>
+            <button id="next-month" aria-label="calendar forward" class="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100"> 
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <polyline points="9 6 15 12 9 18" />
+              </svg>
+            </button>
+          </div>
         </div>
+        <div class="flex items-center justify-between pt-12 overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Mo</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Tu</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">We</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Th</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Fr</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Sa</p></div></th>
+                <th><div class="w-full flex justify-center"><p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Su</p></div></th>
+              </tr>
+            </thead>
+            <tbody id="calendar-body">
+              <!-- Calendar days will be generated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="md:py-8 py-5 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
+        <div class="px-4" id="events-list">
+          <p class="text-sm text-gray-500 dark:text-gray-300">События появятся здесь после создания</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Modal для создания события -->
+  <div id="event-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity">
+    <div class="bg-gray-800 dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-all">
+      <div class="px-6 py-4 border-b border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-semibold text-white dark:text-white">Новое событие</h3>
+          <button id="close-modal" class="text-gray-400 hover:text-gray-200 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="px-6 py-4">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-300 mb-2" for="event-date">
+            Дата
+          </label>
+          <input 
+            type="text" 
+            id="event-date" 
+            readonly
+            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-300 mb-2" for="event-time">
+            Время
+          </label>
+          <input 
+            type="time" 
+            id="event-time" 
+            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            value="09:00"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-300 mb-2" for="event-title">
+            Название события
+          </label>
+          <input 
+            type="text" 
+            id="event-title" 
+            placeholder="Введите название события"
+            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            autofocus
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-300 mb-2" for="event-duration">
+            Длительность (минуты)
+          </label>
+          <input 
+            type="number" 
+            id="event-duration" 
+            min="15"
+            step="15"
+            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            value="60"
+            placeholder="60"
+          />
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-300 mb-2" for="event-description">
+            Описание (опционально)
+          </label>
+          <textarea 
+            id="event-description" 
+            rows="3"
+            placeholder="Добавьте описание события"
+            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+          ></textarea>
+        </div>
+      </div>
+      <div class="px-6 py-4 border-t border-gray-700 flex justify-end space-x-3">
+        <button 
+          id="cancel-btn" 
+          class="px-4 py-2 text-gray-300 hover:text-white bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          Отмена
+        </button>
+        <button 
+          id="save-btn" 
+          class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+        >
+          Сохранить
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast уведомление -->
+  <div id="toast" class="hidden fixed top-4 right-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg px-6 py-4 z-50 transform transition-all">
+    <div class="flex items-center space-x-3">
+      <div id="toast-icon"></div>
+      <p id="toast-message" class="text-white"></p>
+    </div>
+  </div>
+
+  <script>
+    // API endpoint для Spring Boot Backend
+    // Автоматическое определение URL на основе окружения
+    function getApiBaseUrl() {
+      // Если открыто локально (не через Telegram или localhost)
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:8080';
+      }
+      
+      // Если открыто через Cloudflare Pages (продакшен)
+      // Замените на ваш реальный домен
+      // Например: 'https://api.yourdomain.com'
+      
+      // Можно также использовать переменную окружения или параметр URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const apiUrl = urlParams.get('api_url');
+      if (apiUrl) {
+        return apiUrl;
+      }
+      
+      // Продакшен URL (замените на свой)
+      return 'https://api.yourdomain.com';
+    }
+    
+    const API_BASE_URL = getApiBaseUrl();
+    console.log('API Base URL:', API_BASE_URL);
+    
+    // Инициализация Telegram WebApp
+    const tg = window.Telegram?.WebApp;
+    let currentUser = null;
+    let telegramInitData = null; // Полная строка initData для заголовка
+
+    // Проверка, что открыто через Telegram
+    if (!tg?.initDataUnsafe?.user) {
+      alert("Открой через Telegram");
+    } else {
+      tg.ready();
+      tg.expand(); // Раскрываем WebApp на весь экран
+      
+      // Получаем данные пользователя
+      const user = tg.initDataUnsafe.user;
+      currentUser = {
+        id: user.id,
+        name: user.first_name,
+        username: user.username || null,
+      };
+      
+      // Получаем полную строку initData для заголовка X-Telegram-Init-Data
+      // Используем именно tg.initData (как указано в FRONTEND_GUIDE.md)
+      telegramInitData = tg.initData;
+      
+      if (!telegramInitData) {
+        console.warn('Telegram initData недоступен. Проверьте, что приложение открыто через Telegram WebApp.');
+      }
+      
+      console.log('Telegram user:', currentUser);
+      console.log('InitData available:', !!telegramInitData);
+    }
+
+    // Текущий выбранный календарь (пока используем ID 1 по умолчанию)
+    // В будущем можно добавить выбор календаря через UI
+    let currentCalendarId = 1;
+
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+    let selectedDate = null;
+
+    const monthNamesRu = [
+      'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+      'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ];
+
+    function formatDate(year, month, day) {
+      const m = String(month + 1).padStart(2, '0');
+      const d = String(day).padStart(2, '0');
+      return `${year}-${m}-${d}`;
+    }
+
+    function formatDateDisplay(dateStr) {
+      const [year, month, day] = dateStr.split('-');
+      const date = new Date(year, month - 1, day);
+      const dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
+                         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+      return `${dayNames[date.getDay()]}, ${day} ${monthNames[date.getMonth()]} ${year}`;
+    }
+
+    function formatTime(time24) {
+      // Конвертация 24ч формата в 12ч формат (9:00 AM)
+      const [hours, minutes] = time24.split(':');
+      const h = parseInt(hours);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      return `${h12}:${minutes} ${ampm}`;
+    }
+
+    function showModal(date) {
+      selectedDate = date;
+      const modal = document.getElementById('event-modal');
+      const dateInput = document.getElementById('event-date');
+      const timeInput = document.getElementById('event-time');
+      const titleInput = document.getElementById('event-title');
+      const durationInput = document.getElementById('event-duration');
+      const descriptionInput = document.getElementById('event-description');
+      
+      dateInput.value = formatDateDisplay(date);
+      timeInput.value = '09:00';
+      titleInput.value = '';
+      durationInput.value = '60';
+      descriptionInput.value = '';
+      modal.classList.remove('hidden');
+      
+      // Фокус на поле ввода
+      setTimeout(() => titleInput.focus(), 100);
+    }
+
+    // Преобразует date (YYYY-MM-DD) и time (HH:MM) в ISO-8601 формат (UTC)
+    // Создает локальную дату/время и конвертирует в UTC согласно FRONTEND_GUIDE.md
+    function combineDateTime(dateStr, timeStr) {
+      // dateStr: "2025-01-08"
+      // timeStr: "09:00" (локальное время из input[type="time"])
+      // Результат: "2025-01-08T09:00:00Z" (UTC)
+      
+      // Создаем Date объект с локальной датой и временем
+      const [year, month, day] = dateStr.split('-').map(Number);
+      const [hours, minutes] = timeStr.split(':').map(Number);
+      const localDate = new Date(year, month - 1, day, hours, minutes);
+      
+      // Возвращаем ISO строку (автоматически конвертирует в UTC)
+      return localDate.toISOString();
+    }
+
+    function hideModal() {
+      const modal = document.getElementById('event-modal');
+      modal.classList.add('hidden');
+      // Обновляем события после закрытия модалки
+      if (selectedDate) {
+        renderEvents();
+      }
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+      
+      toastMessage.textContent = message;
+      
+      if (type === 'success') {
+        toastIcon.innerHTML = `
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        `;
+      } else {
+        toastIcon.innerHTML = `
+          <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        `;
+      }
+      
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    function renderCalendar() {
+      const titleElement = document.getElementById('calendar-title');
+      titleElement.textContent = `${monthNamesRu[currentMonth]} ${currentYear}`;
+
+      const calendarBody = document.getElementById('calendar-body');
+      calendarBody.innerHTML = '';
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const startingDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Понедельник = 0
+
+      let date = 1;
+      const weeksNeeded = Math.ceil((startingDayOfWeek + daysInMonth) / 7);
+
+      for (let week = 0; week < weeksNeeded; week++) {
+        const row = document.createElement('tr');
+        
+        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+          const cell = document.createElement('td');
+          if (week === 0 && dayOfWeek < startingDayOfWeek) {
+            // Пустые ячейки перед первым днем месяца
+            cell.className = 'pt-6';
+            const div = document.createElement('div');
+            div.className = 'px-2 py-2 cursor-pointer flex w-full justify-center';
+            cell.appendChild(div);
+          } else if (date > daysInMonth) {
+            // Пустые ячейки после последнего дня месяца
+            cell.className = week === 0 ? 'pt-6' : '';
+            const div = document.createElement('div');
+            div.className = 'px-2 py-2 cursor-pointer flex w-full justify-center';
+            cell.appendChild(div);
+          } else {
+            // Ячейка с датой
+            const dayCell = document.createElement('div');
+            dayCell.className = 'px-2 py-2 cursor-pointer flex w-full justify-center day-cell hover:bg-gray-700 rounded-lg transition-colors';
+            dayCell.setAttribute('data-date', formatDate(currentYear, currentMonth, date));
+            
+            const today = new Date();
+            const isToday = date === today.getDate() && 
+                           currentMonth === today.getMonth() && 
+                           currentYear === today.getFullYear();
+
+            if (isToday) {
+              dayCell.innerHTML = `
+                <div class="w-full h-full">
+                  <div class="flex items-center justify-center w-full rounded-full cursor-pointer">
+                    <a role="link" tabindex="0" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">${date}</a>
+                  </div>
+                </div>
+              `;
+            } else {
+              const p = document.createElement('p');
+              p.className = 'text-base text-gray-500 dark:text-gray-100 font-medium';
+              p.textContent = date;
+              dayCell.appendChild(p);
+            }
+
+            dayCell.addEventListener('click', () => {
+              const clickedDate = formatDate(currentYear, currentMonth, date);
+              handleDateClick(clickedDate);
+            });
+            cell.appendChild(dayCell);
+            date++;
+          }
+          row.appendChild(cell);
+        }
+        calendarBody.appendChild(row);
+      }
+      
+      // Обновляем события после рендера календаря
+      if (!selectedDate) {
+        const today = new Date();
+        selectedDate = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
+      }
+      renderEvents();
+    }
+
+    // Получает события из backend API
+    async function fetchEvents(calendarId, startFrom, startTo) {
+      if (!telegramInitData) {
+        console.error('Telegram initData недоступен');
+        return null;
+      }
+
+      try {
+        let url = `${API_BASE_URL}/api/events/calendar/${calendarId}?page=0&size=100`;
+        if (startFrom && startTo) {
+          url += `&startFrom=${startFrom}&startTo=${startTo}`;
+        }
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'X-Telegram-Init-Data': telegramInitData
+          }
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text().catch(() => '');
+          let errorMessage = `Ошибка: ${response.status}`;
+          
+          if (response.status === 401) {
+            errorMessage = 'Ошибка авторизации. Перезагрузите приложение.';
+            if (tg) {
+              tg.showAlert(errorMessage);
+            }
+          } else if (response.status === 403) {
+            errorMessage = 'Доступ запрещен. Вы не являетесь участником календаря.';
+            if (tg) {
+              tg.showAlert(errorMessage);
+            }
+          } else if (response.status === 400) {
+            try {
+              const errorData = JSON.parse(errorText);
+              errorMessage = errorData.message || 'Ошибка валидации. Проверьте данные.';
+            } catch {
+              errorMessage = 'Ошибка валидации. Проверьте данные.';
+            }
+          }
+          
+          showToast(errorMessage, 'error');
+          return null;
+        }
+
+        const page = await response.json();
+        return page.content || [];
+      } catch (error) {
+        console.error('Ошибка получения событий:', error);
+        showToast('Ошибка загрузки событий: ' + error.message, 'error');
+        return null;
+      }
+    }
+
+    // Отображает события из API
+    async function renderEvents() {
+      const eventsList = document.getElementById('events-list');
+      eventsList.innerHTML = '<p class="text-sm text-gray-500 dark:text-gray-300">Загрузка событий...</p>';
+
+      // Получаем события для выбранной даты или сегодняшней даты
+      const today = new Date();
+      const todayStr = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
+      const targetDate = selectedDate || todayStr;
+
+      // Вычисляем диапазон дат для текущего месяца
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const startFrom = `${formatDate(currentYear, currentMonth, 1)}T00:00:00Z`;
+      const startTo = `${formatDate(currentYear, currentMonth, lastDay.getDate())}T23:59:59Z`;
+
+      const allEvents = await fetchEvents(currentCalendarId, startFrom, startTo);
+      
+      if (!allEvents || allEvents.length === 0) {
+        eventsList.innerHTML = '<p class="text-sm text-gray-500 dark:text-gray-300">События появятся здесь после создания</p>';
+        return;
+      }
+
+      // Фильтруем события для выбранной даты
+      const selectedEvents = allEvents.filter(event => {
+        if (!event.startAt) return false;
+        const eventDate = new Date(event.startAt);
+        const targetDateObj = new Date(targetDate + 'T00:00:00Z');
+        return eventDate.toISOString().split('T')[0] === targetDateObj.toISOString().split('T')[0];
+      });
+
+      if (selectedEvents.length === 0) {
+        eventsList.innerHTML = '<p class="text-sm text-gray-500 dark:text-gray-300">На эту дату событий нет</p>';
+        return;
+      }
+
+      // Сортируем события по времени (уже должны быть отсортированы с backend)
+      selectedEvents.sort((a, b) => {
+        if (!a.startAt) return 1;
+        if (!b.startAt) return -1;
+        return new Date(a.startAt) - new Date(b.startAt);
+      });
+
+      eventsList.innerHTML = selectedEvents.map((event, index) => {
+        const startDate = new Date(event.startAt);
+        const timeStr = `${String(startDate.getUTCHours()).padStart(2, '0')}:${String(startDate.getUTCMinutes()).padStart(2, '0')}`;
+        const timeDisplay = formatTime(timeStr);
+        const description = event.description || '';
+        const duration = event.durationMinutes ? `${Math.floor(event.durationMinutes / 60)}ч ${event.durationMinutes % 60}м` : '';
+        
+        return `
+          <div class="border-b pb-4 border-gray-400 border-dashed ${index > 0 ? 'pt-5' : ''}">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">${timeDisplay}${duration ? ` • ${duration}` : ''}</p>
+            </div>
+            <a tabindex="0" class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">${event.title}</a>
+            ${description ? `<p class="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">${description}</p>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function saveEvent() {
+      const titleInput = document.getElementById('event-title');
+      const timeInput = document.getElementById('event-time');
+      const durationInput = document.getElementById('event-duration');
+      const descriptionInput = document.getElementById('event-description');
+      
+      const title = titleInput.value.trim();
+      const time = timeInput.value;
+      const duration = parseInt(durationInput.value) || 60;
+      const description = descriptionInput.value.trim();
+
+      if (!title) {
+        titleInput.focus();
+        return;
+      }
+
+      if (!selectedDate) {
+        return;
+      }
+
+      if (!telegramInitData) {
+        showToast('Требуется авторизация через Telegram', 'error');
+        return;
+      }
+
+      // Блокируем кнопку сохранения
+      const saveBtn = document.getElementById('save-btn');
+      const originalText = saveBtn.textContent;
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Сохранение...';
+
+      try {
+        // Валидация данных перед отправкой (согласно FRONTEND_GUIDE.md)
+        if (!currentCalendarId || currentCalendarId <= 0) {
+          throw new Error('calendarId обязателен и должен быть больше 0');
+        }
+        if (!title || title.trim().length === 0) {
+          throw new Error('Название события обязательно');
+        }
+        if (duration <= 0) {
+          throw new Error('Длительность должна быть больше 0');
+        }
+        
+        // Объединяем дату и время в ISO-8601 формат
+        const startAt = combineDateTime(selectedDate, time);
+        
+        const eventData = {
+          calendarId: currentCalendarId,
+          title: title,
+          description: description || null,
+          startAt: startAt,
+          durationMinutes: duration
+        };
+
+        const response = await fetch(`${API_BASE_URL}/api/events`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Telegram-Init-Data': telegramInitData
+          },
+          body: JSON.stringify(eventData)
+        });
+
+        if (response.ok || response.status === 201) {
+          const result = await response.json();
+          hideModal();
+          
+          // Обновляем события из API
+          await renderEvents();
+          
+          showToast('Событие успешно создано!', 'success');
+          console.log('Event created:', result);
+        } else {
+          // Обработка ошибок согласно FRONTEND_GUIDE.md
+          let errorMessage = 'Ошибка при создании события';
+          const errorText = await response.text().catch(() => '');
+          
+          if (response.status === 401) {
+            errorMessage = 'Ошибка авторизации. Перезагрузите приложение.';
+            if (tg) {
+              tg.showAlert('Ошибка авторизации. Перезагрузите приложение.');
+            }
+          } else if (response.status === 403) {
+            errorMessage = 'Доступ запрещен. Вы не являетесь участником календаря.';
+            if (tg) {
+              tg.showAlert('Доступ запрещен. Вы не являетесь участником календаря.');
+            }
+          } else if (response.status === 400) {
+            try {
+              const errorData = JSON.parse(errorText);
+              errorMessage = errorData.message || 'Неверные данные события';
+            } catch {
+              errorMessage = 'Ошибка валидации. Проверьте данные.';
+            }
+            if (tg) {
+              tg.showAlert(`Ошибка валидации: ${errorMessage}`);
+            }
+          } else {
+            errorMessage = `Ошибка сервера: ${response.status}`;
+            if (tg) {
+              tg.showAlert(`Ошибка: ${response.status}`);
+            }
+          }
+          throw new Error(errorMessage);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('Ошибка при отправке события: ' + error.message, 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = originalText;
+      }
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+      // renderEvents вызовется автоматически после renderCalendar
+    }
+
+    // Обработка клика по дате
+    function handleDateClick(date) {
+      selectedDate = date;
+      renderEvents();
+      showModal(date);
+    }
+
+    // Event listeners
+    document.getElementById('prev-month').addEventListener('click', () => changeMonth(-1));
+    document.getElementById('next-month').addEventListener('click', () => changeMonth(1));
+    
+    // Modal handlers
+    document.getElementById('close-modal').addEventListener('click', hideModal);
+    document.getElementById('cancel-btn').addEventListener('click', hideModal);
+    document.getElementById('save-btn').addEventListener('click', saveEvent);
+    
+    // Закрытие модалки по клику вне её области
+    document.getElementById('event-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'event-modal') {
+        hideModal();
+      }
+    });
+
+    // Закрытие модалки по Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideModal();
+      }
+    });
+
+    // Сохранение по Enter (только в поле названия, не в textarea)
+    document.getElementById('event-title').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        saveEvent();
+      }
+    });
+
+    // Отображаем информацию о пользователе (если доступна)
+    function displayUserInfo() {
+      const userInfoEl = document.getElementById('user-info');
+      if (currentUser && userInfoEl) {
+        const userName = currentUser.username 
+          ? `${currentUser.name} (@${currentUser.username})` 
+          : currentUser.name || 'Пользователь';
+        userInfoEl.textContent = userName;
+        userInfoEl.classList.remove('hidden');
+      }
+    }
+
+    // Initial render
+    renderCalendar();
+    displayUserInfo();
+    
+    // Показываем события для сегодняшней даты по умолчанию
+    const today = new Date();
+    selectedDate = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
+    renderEvents();
+  </script>
 
 </body>
 </html>
