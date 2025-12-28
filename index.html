@@ -168,24 +168,21 @@
     // API endpoint для Spring Boot Backend
     // Автоматическое определение URL на основе окружения
     function getApiBaseUrl() {
-      // Если открыто локально (не через Telegram или localhost)
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return 'http://localhost:8080';
-      }
-      
-      // Если открыто через Cloudflare Pages (продакшен)
-      // Замените на ваш реальный домен
-      // Например: 'https://api.yourdomain.com'
-      
-      // Можно также использовать переменную окружения или параметр URL
+      // Можно использовать параметр URL для переопределения (для отладки)
       const urlParams = new URLSearchParams(window.location.search);
       const apiUrl = urlParams.get('api_url');
       if (apiUrl) {
         return apiUrl;
       }
       
-      // Продакшен URL (замените на свой)
-      return 'https://api.yourdomain.com';
+      // Если открыто локально (не через Telegram или localhost)
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:8080';
+      }
+      
+      // Продакшен URL (Cloudflare Tunnel)
+      // https://november-mid-acceptable-pike.trycloudflare.com → localhost:8080
+      return 'https://november-mid-acceptable-pike.trycloudflare.com';
     }
     
     const API_BASE_URL = getApiBaseUrl();
