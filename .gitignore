@@ -1,7 +1,0 @@
-node_modules/
-.wrangler/
-.env
-*.log
-.DS_Store
-dist/
-build/
